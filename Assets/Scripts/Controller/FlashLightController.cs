@@ -59,7 +59,7 @@ namespace Geekbrains
         {
             _flashLight.Light.enabled = value;
             if (!value) return;
-            _flashLight.transform.position = _flashLight.GoFollow.position + _flashLight.VecOffset;
+			_flashLight.transform.position = _flashLight.GoFollow.position;/* + _flashLight.VecOffset;*/
             _flashLight.transform.rotation = _flashLight.GoFollow.rotation;
         }
 
@@ -90,14 +90,14 @@ namespace Geekbrains
             return false;
         }
 
-        public bool BatteryRecharge()
-        {
-            if (_flashLight.BatteryChargeCurrent < _flashLight.BatteryChargeMax)
-            {
-                _flashLight.BatteryChargeCurrent += Time.deltaTime;
-                return true;
-            }
-            return false;
-        }
+        //public bool BatteryRecharge()
+        //{
+        //    if (_flashLight.BatteryChargeCurrent < _flashLight.BatteryChargeMax)
+        //    {
+        //        _flashLight.BatteryChargeCurrent += Time.deltaTime;
+        //        return true;
+        //    }
+        //    return false;
+        //}
     }
 }

@@ -17,11 +17,11 @@ namespace Geekbrains
 			_curDamage = _baseDamage;
 		}
 
-		private void Start()
-		{
-            DestroyAmmunition(_timeToDestruct);
-            InvokeRepeating(nameof(LossOfDamage), 0, 1);
-		}
+		//private void Start()
+		//{
+  //          DestroyAmmunition(_timeToDestruct);
+  //          InvokeRepeating(nameof(LossOfDamage), 0, 1);
+		//}
 
 		public void AddForce(Vector3 dir)
 		{

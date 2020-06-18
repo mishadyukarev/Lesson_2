@@ -15,30 +15,30 @@ namespace Geekbrains
 			_text = GetComponent<Text>();
 		}
 
-		private void OnEnable()
-		{
-			foreach (var aim in _aims)
-			{
-				aim.OnPointChange += UpdatePoint;
-			}
+		//private void OnEnable()
+		//{
+		//	foreach (var aim in _aims)
+		//	{
+		//		aim.OnPointChange += UpdatePoint;
+		//	}
 			
-			_button.onClick.AddListener(Call);
-		}
+		//	_button.onClick.AddListener(Call);
+		//}
 
-		private void Call()
-		{
-			Debug.Log("Example");
-		}
+		//private void Call()
+		//{
+		//	Debug.Log("Example");
+		//}
 
-		private void OnDisable()
-		{
-			foreach (var aim in _aims)
-			{
-				aim.OnPointChange -= UpdatePoint;
-			}
+		//private void OnDisable()
+		//{
+		//	foreach (var aim in _aims)
+		//	{
+		//		aim.OnPointChange -= UpdatePoint;
+		//	}
 			
-			_button.onClick.RemoveListener(Call);
-		}
+		//	_button.onClick.RemoveListener(Call);
+		//}
 
 		private void UpdatePoint()
 		{
