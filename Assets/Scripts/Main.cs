@@ -41,10 +41,10 @@ namespace Geekbrains
 			_controllers[4] = SelectionController;
 		}
 
-		public void OnStartCoroutine(IEnumerator routine)
-		{
-			StartCoroutine(routine);
-		}
+		//public void OnStartCoroutine(IEnumerator routine)
+		//{
+		//	StartCoroutine(routine);
+		//}
 
 		private void Start()
 		{
@@ -62,9 +62,9 @@ namespace Geekbrains
 				controller.OnUpdate();
 			}
 		}
-		private void OnGUI()
-		{
-			GUI.Label(new Rect(0, 0, 100, 100), $"{1 / Time.deltaTime:0.0}");
-		}
+		//private void OnGUI()
+		//{
+		//	GUI.Label(new Rect(0, 0, 100, 100), $"{1 / Time.deltaTime:0.0}");
+		//}
 	}
 }

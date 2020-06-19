@@ -26,7 +26,7 @@ namespace Geekbrains
 				}
 				Destroy(gameObject, 10);
 
-				OnPointChange?.Invoke();
+				//OnPointChange?.Invoke();
 				_isDead = true;
 			}
 		}
