@@ -23,6 +23,7 @@ namespace Geekbrains
 
 		public void OnUpdate()
 		{
+
 			if (Physics.Raycast(_mainCamera.ScreenPointToRay(_center), out var hit, _dedicateDistance))
 			{
 				SelectObject(hit.collider.gameObject);

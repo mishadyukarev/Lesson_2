@@ -2,11 +2,14 @@
 using System.Linq;
 using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 namespace Geekbrains
 {
 	public class Inventory : IInitialization
 	{
+		private int _countWeapons = 5;
 		private Weapon[] _weapons;
 
 		public Weapon[] Weapons => _weapons;
@@ -21,7 +24,7 @@ namespace Geekbrains
 			{
 				weapon.IsVisible = false;
 			}
-			Array.Resize(ref _weapons, 5);
+			Array.Resize(ref _weapons, _countWeapons);
 
 			FlashLight = UnityEngine.Object.FindObjectOfType<FlashLightModel>();
 		}
@@ -39,8 +42,8 @@ namespace Geekbrains
 				{
 					_weapons[i] = weapon;
 					weapon.transform.SetParent(Camera.main.transform);
-					weapon.transform.forward = _weapons[0].transform.forward;
-					weapon.transform.position = _weapons[0].transform.position;
+					weapon.transform.forward = GameObject.FindWithTag("AppearWeapons").transform.forward;
+					weapon.transform.position = GameObject.FindWithTag("AppearWeapons").transform.position;
 					weapon.IsVisible = false;
 					b = false;
 				}
@@ -50,7 +53,17 @@ namespace Geekbrains
 		}
         public void RemoveWeapon(Weapon weapon)
         {
-            
-        }
+			weapon.transform.SetParent(GameObject.Find("Droped_Weapons").transform);
+			int i = -1;
+			foreach(var w in _weapons)
+			{
+				i++;
+				if(weapon.name == w.name)
+				{
+					_weapons[i] = null;
+					break;
+				}
+			}
+		}
 	}
 }

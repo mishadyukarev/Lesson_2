@@ -7,7 +7,8 @@ namespace Geekbrains
 
 		private KeyCode _activeFlashLight = KeyCode.L;
 		private KeyCode _cancel = KeyCode.Escape;
-		private KeyCode _reloadClip = KeyCode.R;
+
+		private int _mouseButton = (int)MouseButton.LeftButton;
 
 		public InputController()
 		{
@@ -16,55 +17,53 @@ namespace Geekbrains
 		
 		public void OnUpdate()
 		{
-			if (!IsActive) return;
 			if (Input.GetKeyDown(_activeFlashLight))
 			{
 				Main.Instance.FlashLightController.Switch();
 			}
-			//todo реализовать выбор оружия по колесику мыши
+
+			if (Input.GetKeyDown(KeyCode.F))//подбор оружия
+			{
+				Main.Instance.SelectionController._isKey = true;
+			}
 
 			if (Input.GetKeyDown(KeyCode.Alpha1))
 			{
-				SelectWeapon(0);
+				Main.Instance.WeaponController.SelectWeapon(0);
 			}
+
 			if (Input.GetKeyDown(KeyCode.Alpha2))
 			{
-				SelectWeapon(1);
+				Main.Instance.WeaponController.SelectWeapon(1);
 			}
+
 			if (Input.GetKeyDown(KeyCode.Alpha3))
 			{
-				SelectWeapon(2);
+				Main.Instance.WeaponController.SelectWeapon(2);
 			}
+
+			if (Input.GetKeyDown(KeyCode.G))
+			{
+				Main.Instance.WeaponController.RemoveWeapon();
+			}
+
+			if (Input.GetKeyDown(KeyCode.R))
+			{
+				Main.Instance.WeaponController.ReloadClip();
+			}
+
+
+			if (Main.Instance.WeaponController.IsActive == true && Input.GetMouseButton(_mouseButton))
+			{
+				Main.Instance.WeaponController.Fire();
+			}
+
+
 
 			if (Input.GetKeyDown(_cancel))
 			{
 				Main.Instance.WeaponController.Off();
 				Main.Instance.FlashLightController.Off();
-			}
-
-			if (Input.GetKeyDown(_reloadClip))
-			{
-				Main.Instance.WeaponController.ReloadClip();
-			}
-
-			if (Input.GetKeyDown(KeyCode.F))
-			{
-				Main.Instance.SelectionController._isKey = true;
-			}
-		}
-
-
-		/// <summary>
-		/// Выбор оружия
-		/// </summary>
-		/// <param name="i">Номер оружия</param>
-		private void SelectWeapon(int i)
-		{
-			Main.Instance.WeaponController.Off();
-			var tempWeapon = Main.Instance.Inventory.Weapons[i]; // инкапсулировать
-			if (tempWeapon != null)
-			{
-				Main.Instance.WeaponController.On(tempWeapon);
 			}
 		}
 	}

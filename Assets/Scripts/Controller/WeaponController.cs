@@ -5,16 +5,10 @@ namespace Geekbrains
 	public class WeaponController : BaseController, IOnUpdate
 	{
 		private Weapon _weapon;
-		private int _mouseButton = (int)MouseButton.LeftButton;
 
 		public void OnUpdate()
 		{
-			if (!IsActive) return;
-			if (Input.GetMouseButton(_mouseButton))
-			{
-				_weapon.Fire();
-				UiInterface.WeaponUiText.ShowData(_weapon.Clip.CountAmmunition, _weapon.CountClip);
-			}
+
 		}
 
 		public override void On(BaseObjectScene weapon)
@@ -43,6 +37,36 @@ namespace Geekbrains
 			if (_weapon == null) return;
 			_weapon.ReloadClip();
 			UiInterface.WeaponUiText.ShowData(_weapon.Clip.CountAmmunition, _weapon.CountClip);
+		}
+
+		public void RemoveWeapon()
+		{
+			if (_weapon)
+			{
+				Main.Instance.Inventory.RemoveWeapon(_weapon);
+				Off();
+			}
+		}
+
+		public void Fire()
+		{
+			if (!IsActive) return;
+			_weapon.Fire();
+			UiInterface.WeaponUiText.ShowData(_weapon.Clip.CountAmmunition, _weapon.CountClip);
+		}
+
+		/// <summary>
+		/// Выбор оружия
+		/// </summary>
+		/// <param name="i">Номер оружия</param>
+		public void SelectWeapon(int i)
+		{
+			Main.Instance.WeaponController.Off();
+			var tempWeapon = Main.Instance.Inventory.Weapons[i]; // инкапсулировать
+			if (tempWeapon != null)
+			{
+				Main.Instance.WeaponController.On(tempWeapon);
+			}
 		}
 	}
 }
