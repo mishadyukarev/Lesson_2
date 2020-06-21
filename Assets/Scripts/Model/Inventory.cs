@@ -33,6 +33,7 @@ namespace Geekbrains
 			bool b = true;
 			foreach (var w in _weapons)
 			{
+				if (w && w.name == weapon.name) break;
 				i++;
 				if (w == null)
 				{

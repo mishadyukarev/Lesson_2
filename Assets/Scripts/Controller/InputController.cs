@@ -5,7 +5,7 @@ namespace Geekbrains
 	public class InputController : BaseController, IOnUpdate
 	{
 
-		private KeyCode _activeFlashLight = KeyCode.F;
+		private KeyCode _activeFlashLight = KeyCode.L;
 		private KeyCode _cancel = KeyCode.Escape;
 		private KeyCode _reloadClip = KeyCode.R;
 
@@ -45,6 +45,11 @@ namespace Geekbrains
 			if (Input.GetKeyDown(_reloadClip))
 			{
 				Main.Instance.WeaponController.ReloadClip();
+			}
+
+			if (Input.GetKeyDown(KeyCode.F))
+			{
+				Main.Instance.SelectionController._isKey = true;
 			}
 		}
 

@@ -5,6 +5,8 @@ namespace Geekbrains
 {
 	public sealed class SelectionController : BaseController, IOnUpdate
 	{
+		public bool _isKey;
+
 		private readonly Camera _mainCamera;
 		private readonly Vector2 _center;
 		private readonly float _dedicateDistance = 20;
@@ -26,30 +28,19 @@ namespace Geekbrains
 				SelectObject(hit.collider.gameObject);
 				_nullString = false;
 			}
-			else if(!_nullString)
+			else if (!_nullString)
 			{
 				UiInterface.SelectionObjMessageUi.Text = String.Empty;
 				_nullString = true;
 				_dedicatedObj = null;
 				_isSelectedObj = false;
 			}
-			if (_isSelectedObj)
+
+			if (_isSelectedObj && _isKey)
 			{
-				// Действие над объектом
-
-				switch (_selectedObj)
-				{
-					case Weapon aim:
-						//UiInterface.SelectionObjMessageUi.Text = "3";
-						// в инвентарь
-
-
-						Main.Instance.Inventory.AddWeapon(aim);
-						break;
-					case Wall wall:
-						break;
-				}
+				Main.Instance.Inventory.AddWeapon(_selectedObj as Weapon);
 			}
+			_isKey = false;
 		}
 
 		private void SelectObject(GameObject obj)
