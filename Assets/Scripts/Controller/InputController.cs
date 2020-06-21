@@ -31,6 +31,10 @@ namespace Geekbrains
 			{
 				SelectWeapon(1);
 			}
+			if (Input.GetKeyDown(KeyCode.Alpha3))
+			{
+				SelectWeapon(2);
+			}
 
 			if (Input.GetKeyDown(_cancel))
 			{

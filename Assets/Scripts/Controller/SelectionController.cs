@@ -40,12 +40,12 @@ namespace Geekbrains
 				switch (_selectedObj)
 				{
 					case Weapon aim:
+						//UiInterface.SelectionObjMessageUi.Text = "3";
+						// в инвентарь
 
-                        // в инвентарь
 
-
-                        //Inventory.AddWeapon(aim);
-                        break;
+						Main.Instance.Inventory.AddWeapon(aim);
+						break;
 					case Wall wall:
 						break;
 				}

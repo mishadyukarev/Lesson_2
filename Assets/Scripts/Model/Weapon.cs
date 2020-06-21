@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Geekbrains
 {
-	public abstract class Weapon : BaseObjectScene
+	public abstract class Weapon : BaseObjectScene, ISelectObj
 	{
 		private int _maxCountAmmunition = 40;
 		private int _minCountAmmunition = 20;
@@ -25,7 +25,10 @@ namespace Geekbrains
 		{
 			for (var i = 0; i <= _countClip; i++)
 			{
-				AddClip(new Clip { CountAmmunition = Random.Range(_minCountAmmunition, _maxCountAmmunition) });
+				AddClip(new Clip
+				{
+					CountAmmunition = Random.Range(_minCountAmmunition, _maxCountAmmunition)
+				});
 			}
 
 			ReloadClip();
@@ -41,6 +44,7 @@ namespace Geekbrains
 		//		ReadyShoot();
 		//	}
 		//}
+		abstract public string GetMessage();
 
 		protected void ReadyShoot()
 		{

@@ -3,6 +3,10 @@ namespace Geekbrains
 {
 	public sealed class Gun : Weapon
 	{
+		public override string GetMessage()
+		{
+			return this.name;
+		}
 		public override void Fire()
 		{
 			if (!_isReady) return;
