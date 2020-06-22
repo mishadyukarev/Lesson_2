@@ -27,7 +27,14 @@ namespace Geekbrains
 		{
 			if (!IsActive) return;
 			base.Off();
-			_weapon.IsVisible = false;
+			_weapon.IsVisible = false;//*1
+			_weapon = null;
+			UiInterface.WeaponUiText.SetActive(false);
+		}
+		public void OffNotVisible()//*1
+		{
+			if (!IsActive) return;
+			base.Off();
 			_weapon = null;
 			UiInterface.WeaponUiText.SetActive(false);
 		}
@@ -44,7 +51,7 @@ namespace Geekbrains
 			if (_weapon)
 			{
 				Main.Instance.Inventory.RemoveWeapon(_weapon);
-				Off();
+				OffNotVisible();
 			}
 		}
 

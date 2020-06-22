@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.InteropServices;
+using UnityEditor.SceneManagement;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -32,6 +34,9 @@ namespace Geekbrains
 		//todo Добавить функционал
 		public void AddWeapon(Weapon weapon)
 		{
+			weapon.Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+			weapon.GetComponent<BoxCollider>().enabled = false;
+
 			int i = -1;
 			bool b = true;
 			foreach (var w in _weapons)
@@ -54,12 +59,17 @@ namespace Geekbrains
         public void RemoveWeapon(Weapon weapon)
         {
 			weapon.transform.SetParent(GameObject.Find("Droped_Weapons").transform);
+
 			int i = -1;
 			foreach(var w in _weapons)
 			{
 				i++;
-				if(weapon.name == w.name)
+				if (weapon.name == w.name)
 				{
+					weapon.GetComponent<BoxCollider>().enabled = true;
+					weapon.Rigidbody.constraints = RigidbodyConstraints.None;
+					weapon.Rigidbody.AddForce(weapon.transform.forward * 2000);
+					weapon.Rigidbody.AddForce(weapon.transform.right * 200);
 					_weapons[i] = null;
 					break;
 				}
