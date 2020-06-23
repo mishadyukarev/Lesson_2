@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Geekbrains
@@ -7,31 +8,32 @@ namespace Geekbrains
 	{
 		private int _maxCountAmmunition = 40;
 		private int _minCountAmmunition = 20;
-		private int _countClip = 5;
 		public Ammunition Ammunition;
-		public Clip Clip;
 
 		protected AmmunitionType[] _ammunitionType = {AmmunitionType.Bullet};
 
 		[SerializeField] protected Transform _barrel;
 		[SerializeField] protected float _force = 999;
-		[SerializeField] protected float _rechergeTime = 0.2f;
-		private Queue<Clip> _clips = new Queue<Clip>();
+		[SerializeField] protected float _rechergeTime = 0.001f;
 
 		protected bool _isReady = true;
 		//protected Timer _timer = new Timer();
 
+		public Clip Clip;
+		private Clip[] _clips;
+		private int _countClips = 3;
+		private int _queueNow;
+
+		public int CountClip => _countClips;
 		protected virtual void Start()
 		{
-			for (var i = 0; i <= _countClip; i++)
+			_clips = new Clip[_countClips];
+			for(int i = 0; i < _countClips; i++)
 			{
-				AddClip(new Clip
-				{
-					CountAmmunition = Random.Range(_minCountAmmunition, _maxCountAmmunition)
-				});
+				_clips[i].CountAmmunition = UnityEngine.Random.Range(_minCountAmmunition, _maxCountAmmunition);
 			}
-
-			ReloadClip();
+			_queueNow = 0;
+			Clip = _clips[_queueNow];
 		}
 
 		public abstract void Fire();
@@ -51,17 +53,23 @@ namespace Geekbrains
 			_isReady = true;
 		}
 
-		protected void AddClip(Clip clip)
-		{
-			_clips.Enqueue(clip);
-		}
+		//protected void AddClip()
+		//{
+			
+		//}
 
 		public void ReloadClip()
 		{
-			if (CountClip <= 0) return;
-			Clip = _clips.Dequeue();
+			if (Clip.CountAmmunition == 0) Array.Clear(_clips, _queueNow, 1);
+			_queueNow++;
+			if (_queueNow >= _countClips) _queueNow = 0;
+			Clip = _clips[_queueNow];
 		}
 
-		public int CountClip => _clips.Count;
+		public void TakeAway(int i)
+		{
+			Clip.CountAmmunition -= i;
+			_clips[_queueNow] = Clip;
+		}
 	}
 }

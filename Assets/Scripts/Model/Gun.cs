@@ -13,7 +13,7 @@ namespace Geekbrains
 			if (Clip.CountAmmunition <= 0) return;
 			var temAmmunition = Instantiate(Ammunition, _barrel.position, _barrel.rotation);//todo Pool object
 			temAmmunition.AddForce(_barrel.forward * _force);
-			Clip.CountAmmunition--;
+			TakeAway(1);
 			_isReady = false;
 			Invoke(nameof(ReadyShoot), _rechergeTime);
 			//_timer.Start(_rechergeTime);
