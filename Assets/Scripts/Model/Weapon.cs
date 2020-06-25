@@ -22,7 +22,7 @@ namespace Geekbrains
 		public Clip Clip;
 		private Clip[] _clips;
 		private int _countClips = 3;
-		private int _queueNow;
+		private int _queueNow = 0;
 
 		public int CountClip => _countClips;
 		protected virtual void Start()
@@ -32,7 +32,6 @@ namespace Geekbrains
 			{
 				_clips[i].CountAmmunition = UnityEngine.Random.Range(_minCountAmmunition, _maxCountAmmunition);
 			}
-			_queueNow = 0;
 			Clip = _clips[_queueNow];
 		}
 
@@ -66,7 +65,7 @@ namespace Geekbrains
 			Clip = _clips[_queueNow];
 		}
 
-		public void TakeAway(int i)
+		public void TakeAway(int i = 1)
 		{
 			Clip.CountAmmunition -= i;
 			_clips[_queueNow] = Clip;

@@ -23,7 +23,7 @@ namespace Geekbrains
 			}
 			else
 			{
-				Off();
+				Off(false);
 			}
 		}
 
@@ -46,10 +46,10 @@ namespace Geekbrains
 			UiInterface.FlashLightUiBar.SetColor(Color.green);
 		}
 
-		public sealed override void Off()
+		public sealed override void Off(bool b)
 		{
 			if (!IsActive) return;
-			base.Off();
+			base.Off(b);
 			Switch(false);
 			UiInterface.LightUiText.SetActive(false);
 			UiInterface.FlashLightUiBar.SetActive(false);

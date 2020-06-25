@@ -21,7 +21,7 @@ namespace Geekbrains
 			IsActive = true;
 		}
 
-		public virtual void Off()
+		public virtual void Off(bool b)
 		{
 			IsActive = false;
 		}
@@ -30,7 +30,7 @@ namespace Geekbrains
 		{
 			if (IsActive)
 			{
-				Off();
+				Off(true);
 			}
 			else
 			{

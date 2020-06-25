@@ -62,8 +62,8 @@ namespace Geekbrains
 
 			if (Input.GetKeyDown(_cancel))
 			{
-				Main.Instance.WeaponController.Off();
-				Main.Instance.FlashLightController.Off();
+				Main.Instance.WeaponController.Off(false);
+				Main.Instance.FlashLightController.Off(false);
 			}
 		}
 	}

@@ -23,18 +23,11 @@ namespace Geekbrains
 			UiInterface.WeaponUiText.ShowData(_weapon.Clip.CountAmmunition, _weapon.CountClip);
 		}
 
-		public override void Off()
+		public override void Off(bool b)//b - для обработки видимости (когда оружие выбрасываем)
 		{
 			if (!IsActive) return;
-			base.Off();
-			_weapon.IsVisible = false;//*1
-			_weapon = null;
-			UiInterface.WeaponUiText.SetActive(false);
-		}
-		public void OffNotVisible()//*1
-		{
-			if (!IsActive) return;
-			base.Off();
+			base.Off(b);
+			_weapon.IsVisible = b;
 			_weapon = null;
 			UiInterface.WeaponUiText.SetActive(false);
 		}
@@ -51,7 +44,7 @@ namespace Geekbrains
 			if (_weapon)
 			{
 				Main.Instance.Inventory.RemoveWeapon(_weapon);
-				OffNotVisible();
+				Off(true);
 			}
 		}
 
@@ -68,7 +61,7 @@ namespace Geekbrains
 		/// <param name="i">Номер оружия</param>
 		public void SelectWeapon(int i)
 		{
-			Main.Instance.WeaponController.Off();
+			Main.Instance.WeaponController.Off(true);
 			var tempWeapon = Main.Instance.Inventory.Weapons[i]; // инкапсулировать
 			if (tempWeapon != null)
 			{

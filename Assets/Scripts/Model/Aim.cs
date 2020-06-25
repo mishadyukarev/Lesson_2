@@ -5,7 +5,7 @@ namespace Geekbrains
 {
 	public class Aim : MonoBehaviour, ISetDamage, ISelectObj
 	{
-		//public event Action OnPointChange;
+		public event Action OnPointChange;
 		
 		public float Hp = 101;
 		private bool _isDead;
@@ -26,7 +26,7 @@ namespace Geekbrains
 				}
 				Destroy(gameObject, 10);
 
-				//OnPointChange?.Invoke();
+				OnPointChange?.Invoke();
 				_isDead = true;
 			}
 		}

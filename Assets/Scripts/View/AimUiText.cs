@@ -7,7 +7,7 @@ namespace Geekbrains
 	{
 		private Aim[] _aims;
 		private Text _text;
-		private Button _button;
+		//private Button;
 		private int _countPoint;
 		private void Awake()
 		{
@@ -15,30 +15,30 @@ namespace Geekbrains
 			_text = GetComponent<Text>();
 		}
 
-		//private void OnEnable()
-		//{
-		//	foreach (var aim in _aims)
-		//	{
-		//		aim.OnPointChange += UpdatePoint;
-		//	}
-			
-		//	_button.onClick.AddListener(Call);
-		//}
+		private void OnEnable()
+		{
+			foreach (var aim in _aims)
+			{
+				aim.OnPointChange += UpdatePoint;
+			}
 
-		//private void Call()
-		//{
-		//	Debug.Log("Example");
-		//}
+			//_button.onClick.AddListener(Call);
+		}
 
-		//private void OnDisable()
-		//{
-		//	foreach (var aim in _aims)
-		//	{
-		//		aim.OnPointChange -= UpdatePoint;
-		//	}
-			
-		//	_button.onClick.RemoveListener(Call);
-		//}
+		private void Call()
+		{
+			Debug.Log("Example");
+		}
+
+		private void OnDisable()
+		{
+			foreach (var aim in _aims)
+			{
+				aim.OnPointChange -= UpdatePoint;
+			}
+
+			//_button.onClick.RemoveListener(Call);
+		}
 
 		private void UpdatePoint()
 		{
