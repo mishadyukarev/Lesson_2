@@ -17,7 +17,7 @@ namespace Geekbrains
 		[SerializeField] protected float _rechergeTime = 0.001f;
 
 		protected bool _isReady = true;
-		//protected Timer _timer = new Timer();
+		protected Timer _timer = new Timer();
 
 		public Clip Clip;
 		private Clip[] _clips;
@@ -37,14 +37,14 @@ namespace Geekbrains
 
 		public abstract void Fire();
 
-		//protected virtual void Update()
-		//{
-		//	_timer.Update();
-		//	if (_timer.IsEvent())
-		//	{
-		//		ReadyShoot();
-		//	}
-		//}
+		protected virtual void Update()
+		{
+			_timer.UpdateTimer();
+			if (_timer.IsEvent())
+			{
+				ReadyShoot();
+			}
+		}
 		abstract public string GetMessage();
 
 		protected void ReadyShoot()
@@ -54,7 +54,7 @@ namespace Geekbrains
 
 		//protected void AddClip()
 		//{
-			
+
 		//}
 
 		public void ReloadClip()

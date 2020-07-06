@@ -15,8 +15,8 @@ namespace Geekbrains
 			temAmmunition.AddForce(_barrel.forward * _force);
 			TakeAway();
 			_isReady = false;
-			Invoke(nameof(ReadyShoot), _rechergeTime);
-			//_timer.Start(_rechergeTime);
+			//Invoke(nameof(ReadyShoot), _rechergeTime);
+			_timer.StartTimer(_rechergeTime);
 		}
 	}
 }
